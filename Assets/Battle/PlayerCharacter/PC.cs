@@ -3,6 +3,7 @@
 public class PC : MonoBehaviour {
     private AbstractPCAction action;
     private AttackableTarget attackable;
+    private float moveSpeed = 1.0f;
 
     private void Start()
     {
@@ -11,9 +12,14 @@ public class PC : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if(attackable.IsDead == true) {
+        var dt = Time.fixedDeltaTime;
+
+        if (attackable.IsDead == true) {
             Die();
         }
+
+        var moveDelta = new Vector3(moveSpeed * dt, 0, 0);
+        transform.localPosition += moveDelta;
     }
 
     private void Die()
