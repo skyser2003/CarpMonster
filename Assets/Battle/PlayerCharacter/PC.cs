@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 
-public class PC : MonoBehaviour {
+public class PC : AttackableTarget {
     private AbstractPCAction action;
-    private AttackableTarget attackable;
-    private float moveSpeed = 1.0f;
+
+    private float moveSpeed;
+    private int damage;
 
     private void Start()
     {
-        attackable = GetComponent<AttackableTarget>();
+        hp = 20;
+        Group = 0;
+
+        moveSpeed = 1;
+        damage = 10;
         SetAction(new PCActionJump());
     }
 
@@ -15,8 +20,8 @@ public class PC : MonoBehaviour {
     {
         var dt = Time.fixedDeltaTime;
 
-        if (attackable.IsDead == true) {
-            Die();
+        if (IsDead == true) {
+            ProcessDie();
         }
 
         var moveDelta = new Vector3(moveSpeed * dt, 0, 0);
@@ -25,7 +30,7 @@ public class PC : MonoBehaviour {
         action.Update(dt);
     }
 
-    private void Die()
+    private void ProcessDie()
     {
         Destroy(gameObject);
     }

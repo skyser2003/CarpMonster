@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-class AttackableTarget : MonoBehaviour {
-    private int hp;
+public class AttackableTarget : MonoBehaviour {
+    protected int hp;
     
+    public int Group { get; protected set; }
     public bool IsDead { get; private set; }
 
     private void Start()
     {
-        hp = 20;
         IsDead = false;
     }
 

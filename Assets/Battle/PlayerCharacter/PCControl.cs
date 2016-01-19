@@ -13,5 +13,8 @@ class PCControl : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space)) {
             pc.Action();
         }
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            pc.Attack();
+        }
     }
 }

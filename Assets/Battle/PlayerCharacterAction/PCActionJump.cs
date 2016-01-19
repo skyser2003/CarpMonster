@@ -1,13 +1,23 @@
 ﻿using UnityEngine;
 
 class PCActionJump : AbstractPCAction {
-    private bool jumpPossible;
+    private int possibleJumpCount = 1;
+    private int currentJumpCount;
     private float speed;
     private float gravity;
 
+    public PCActionJump()
+    {
+        currentJumpCount = possibleJumpCount;
+    }
+
     override protected void ActionInner()
     {
-        jumpPossible = false;
+        if (currentJumpCount == 0) {
+            return;
+        }
+
+        --currentJumpCount;
         speed = 10;
         gravity = 20;
     }
@@ -22,7 +32,7 @@ class PCActionJump : AbstractPCAction {
 
         if (newPos.y <= 0) {
             newPos.y = 0;
-            jumpPossible = true;
+            currentJumpCount = possibleJumpCount;
         }
 
         pc.transform.localPosition = newPos;

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 class AttackProjectile : MonoBehaviour {
+    private int group;
+
     private Vector2 velocity;
     private int damage;
 
@@ -15,7 +17,7 @@ class AttackProjectile : MonoBehaviour {
     {
         var other = collider.gameObject;
         var attackable = other.GetComponent<AttackableTarget>();
-        if (attackable != null) {
+        if (attackable != null && attackable.Group != group) {
             attackable.ProcessAttack(damage);
             Destroy();
         }
@@ -26,8 +28,9 @@ class AttackProjectile : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public void Init(Vector2 velocity, int damage)
+    public void Init(int group, Vector2 velocity, int damage)
     {
+        this.group = group;
         this.velocity = velocity;
         this.damage = damage;
     }

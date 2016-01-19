@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
 
-class AttackingEnemy : MonoBehaviour {
+class AttackingEnemy : Enemy {
     private int damage = 10;
     private float attackSpeed = 1.0f;
     private float attackDelay = 1.0f;
 
-    private void Start()
+    override protected void Start()
     {
+        base.Start();
 
+        hp = 10;
+        Group = 1;
     }
 
     private void FixedUpdate()
     {
         var dt = Time.fixedDeltaTime;
+
+        if (IsDead == true) {
+            ProcessDie();
+        }
 
         attackDelay -= dt;
         if (attackDelay <= 0) {
@@ -27,6 +34,6 @@ class AttackingEnemy : MonoBehaviour {
         obj.transform.localPosition = transform.localPosition;
 
         var projectile = obj.GetComponent<AttackProjectile>();
-        projectile.Init(new Vector2(-1, 0), damage);
+        projectile.Init(Group, new Vector2(-3, 0), damage);
     }
 }
