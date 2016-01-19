@@ -8,6 +8,7 @@ public class PC : MonoBehaviour {
     private void Start()
     {
         attackable = GetComponent<AttackableTarget>();
+        SetAction(new PCActionJump());
     }
 
     private void FixedUpdate()
@@ -20,6 +21,8 @@ public class PC : MonoBehaviour {
 
         var moveDelta = new Vector3(moveSpeed * dt, 0, 0);
         transform.localPosition += moveDelta;
+
+        action.Update(dt);
     }
 
     private void Die()
@@ -30,5 +33,13 @@ public class PC : MonoBehaviour {
     public void SetAction(AbstractPCAction action)
     {
         this.action = action;
+        action.SetPC(this);
+    }
+
+    public void Action()
+    {
+        if (action != null) {
+            action.Action();
+        }
     }
 }
