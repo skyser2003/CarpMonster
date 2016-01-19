@@ -24,6 +24,8 @@ class AttackingEnemy : MonoBehaviour {
     private void Attack()
     {
         var obj = Instantiate(Resources.Load("bullet")) as GameObject;
+        obj.transform.localPosition = transform.localPosition;
+
         var projectile = obj.GetComponent<AttackProjectile>();
         projectile.Init(new Vector2(-1, 0), damage);
     }
