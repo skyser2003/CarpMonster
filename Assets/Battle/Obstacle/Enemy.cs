@@ -7,9 +7,10 @@ abstract public class Enemy : MonoBehaviour {
 
     protected AttackableTarget attackable;
 
+    public int ID { get; set; }
+
     protected virtual void Start()
     {
-        Map.Instance.AddEnemy(this);
         attackable = GetComponent<AttackableTarget>();
     }
 }

@@ -21,9 +21,34 @@ class Map : MonoBehaviour {
         pc = GameObject.Find("Carp").GetComponent<PC>();
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < 100; ++i) {
+            int xPos = i * 10;
+            GenerateNewMonster(i, xPos);
+        }
+    }
+
     private void FixedUpdate()
     {
         var dt = Time.fixedDeltaTime;
+
+        // Remove past enemies
+        var removeList = new List<Enemy>();
+
+        foreach (var enemy in enemyList) {
+            if (enemy.transform.localPosition.x + 1 <= pc.transform.localPosition.x) {
+                removeList.Add(enemy);
+            }
+        }
+
+        foreach (var enemy in removeList) {
+            RemoveEnemy(enemy);
+            Destroy(enemy.gameObject);
+        }
+
+        // Activate next enemy
+        enemyList[0].gameObject.SetActive(true);
 
         // Change pc action to closest monster's setting
         var closest = FindClosest(pc.transform.localPosition, 2);
@@ -34,7 +59,7 @@ class Map : MonoBehaviour {
                 }
 
                 target = closest;
-                closest.SetPCAction(pc);
+                target.SetPCAction(pc);
             }
         }
         else {
@@ -44,17 +69,9 @@ class Map : MonoBehaviour {
         }
 
         target = closest;
-
-        // Generate new monster
-        var newPcIndex = (int)(pc.transform.localPosition.x / 5.0f);
-        if (newPcIndex != pcIndex) {
-            pcIndex = newPcIndex;
-
-            GenerateNewMonster((pcIndex + 1) * 5);
-        }
     }
 
-    public void GenerateNewMonster(int xPos)
+    public void GenerateNewMonster(int id, int xPos)
     {
         var monsterList = new string[] { "AttackingEnemy", "HurdleEnemy", "WallEnemy" };
         var index = Random.Range(0, monsterList.Length);
@@ -62,6 +79,8 @@ class Map : MonoBehaviour {
         var monsterName = monsterList[index];
         var newMonster = Instantiate(Resources.Load(monsterName)) as GameObject;
         newMonster.transform.localPosition = new Vector3(xPos, 0, 0);
+        newMonster.SetActive(false);
+        newMonster.GetComponent<Enemy>().ID = id;
 
         AddEnemy(newMonster.GetComponent<Enemy>());
     }
