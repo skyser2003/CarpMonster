@@ -15,7 +15,7 @@ class PCActionCloseAttack : AbstractPCAction {
 
     protected override void ActionInner()
     {
-        var enemy = Map.Instance.FindClosest(pc.transform.localPosition, 1);
+        var enemy = Map.Instance.FindClosest(pc.transform.localPosition, 1.5f);
         if (enemy == null) {
             return;
         }

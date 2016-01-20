@@ -26,7 +26,8 @@ class Map : MonoBehaviour {
 
         var closest = FindClosest(pc.transform.localPosition, 2);
         if (closest != null) {
-
+            this.closest = closest;
+            closest.SetPCAction(pc);
         }
     }
 
