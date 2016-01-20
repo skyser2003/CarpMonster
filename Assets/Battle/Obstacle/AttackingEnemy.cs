@@ -2,8 +2,8 @@
 
 class AttackingEnemy : Enemy {
     private int damage = 10;
-    private float attackSpeed = 1.0f;
-    private float attackDelay = 1.0f;
+    private float attackSpeed = 3.0f;
+    private float attackDelay;
 
     protected override void Start()
     {
@@ -11,6 +11,8 @@ class AttackingEnemy : Enemy {
 
         attackable.hp = 10;
         attackable.Group = 1;
+
+        attackDelay = attackSpeed;
     }
 
     private void FixedUpdate()
