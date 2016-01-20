@@ -11,7 +11,6 @@ public class PC : MonoBehaviour {
     virtual protected void Start()
     {
         attackable = GetComponent<AttackableTarget>();
-        attackable.hp = 100;
         attackable.Group = 0;
 
         moveSpeed = 1;

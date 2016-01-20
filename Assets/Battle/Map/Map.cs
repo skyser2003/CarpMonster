@@ -7,7 +7,7 @@ class Map : MonoBehaviour {
 
     private List<Enemy> enemyList = new List<Enemy>();
     private PC pc;
-    private Enemy closest;
+    private Enemy target;
 
     private Map()
     {
@@ -26,9 +26,22 @@ class Map : MonoBehaviour {
 
         var closest = FindClosest(pc.transform.localPosition, 2);
         if (closest != null) {
-            this.closest = closest;
-            closest.SetPCAction(pc);
+            if (target != closest) {
+                if (target != null) {
+                    target.UnsetPCAction(pc);
+                }
+
+                target = closest;
+                closest.SetPCAction(pc);
+            }
         }
+        else {
+            if (target != null) {
+                target.UnsetPCAction(pc);
+            }
+        }
+
+        target = closest;
     }
 
     public void AddEnemy(Enemy enemy)
@@ -39,8 +52,9 @@ class Map : MonoBehaviour {
     public void RemoveEnemy(Enemy enemy)
     {
         enemyList.Remove(enemy);
-        if(enemy == closest) {
-            closest.UnsetPCAction(pc);
+        if (enemy == target) {
+            target.UnsetPCAction(pc);
+            target = null;
         }
     }
 
@@ -52,7 +66,7 @@ class Map : MonoBehaviour {
         foreach (var enemy in enemyList) {
             float tempDist = Vector3.Distance(enemy.transform.localPosition, pos);
 
-            if (ret == null || tempDist < distance) {
+            if ((pos.x <= enemy.transform.localPosition.x) && (ret == null || tempDist < distance)) {
                 ret = enemy;
                 distance = tempDist;
             }
@@ -69,7 +83,7 @@ class Map : MonoBehaviour {
         foreach (var enemy in enemyList) {
             float tempDist = Vector3.Distance(enemy.transform.localPosition, pos);
 
-            if ((tempDist <= maxDistance) && (ret == null || tempDist < distance)) {
+            if ((pos.x <= enemy.transform.localPosition.x) && (tempDist <= maxDistance) && (ret == null || tempDist < distance)) {
                 ret = enemy;
                 distance = tempDist;
             }

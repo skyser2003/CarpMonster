@@ -14,7 +14,6 @@ class AttackingEnemy : Enemy {
     {
         base.Start();
 
-        attackable.hp = 20;
         attackable.Group = 1;
         pc = GameObject.Find("Carp").GetComponent<PC>();
 
@@ -103,6 +102,7 @@ class AttackingEnemy : Enemy {
     public override void SetPCAction(PC pc)
     {
         pc.SetAction(new PCActionCloseAttack());
+        AttackSpeed = 0;
     }
 
     public override void UnsetPCAction(PC pc)
