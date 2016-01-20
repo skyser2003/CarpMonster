@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class NonAttackingEnemy : Enemy {
+class WallEnemy : Enemy {
     private PC pc;
     private void FixedUpdate()
     {

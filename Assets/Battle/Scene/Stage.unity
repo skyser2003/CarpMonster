@@ -100,7 +100,7 @@ GameObject:
   - 114: {fileID: 112824381}
   - 114: {fileID: 112824384}
   m_Layer: 0
-  m_Name: Enemy (1)
+  m_Name: WallEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 112824380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a75c9ecadce7584abfbfb1d8ce8bf0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d6a625ce19605b4da75cb7be1494d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &112824382
@@ -259,7 +259,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -315,7 +315,7 @@ GameObject:
   - 50: {fileID: 919183027}
   - 114: {fileID: 919183031}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: AttackingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
