@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 
 class AttackingEnemy : Enemy {
-    private float attackSpeed = 0;
     private float attackDelay;
+    private PC pc;
 
-    public int Damage { get; private set; }
+    public float AttackSpeed;
+    public int RangeDamage;
+    public int CloseDamage;
+    public bool IsWall;
+    public bool GetKnockBacked;
 
     protected override void Start()
     {
@@ -12,9 +16,9 @@ class AttackingEnemy : Enemy {
 
         attackable.hp = 20;
         attackable.Group = 1;
+        pc = GameObject.Find("Carp").GetComponent<PC>();
 
-        attackDelay = attackSpeed;
-        Damage = 10;
+        attackDelay = AttackSpeed;
     }
 
     private void FixedUpdate()
@@ -23,24 +27,59 @@ class AttackingEnemy : Enemy {
 
         if (attackable.IsDead == true) {
             ProcessDie();
+            return;
         }
 
-        if (attackSpeed > 0) {
+        if (AttackSpeed > 0) {
             attackDelay -= dt;
             if (attackDelay <= 0) {
-                attackDelay += attackSpeed;
-                Attack();
+                attackDelay += AttackSpeed;
+                RangeAttack();
             }
         }
     }
 
-    private void Attack()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
+        var other = collider.gameObject;
+        if (other.GetComponent<PC>() != null) {
+            if (IsWall == true) {
+                pc.Moveable = false;
+            }
+
+            CloseAttack();
+        }
+    }
+
+    private void RangeAttack()
+    {
+        if (RangeDamage == 0) {
+            return;
+        }
+
         var obj = Instantiate(Resources.Load("bullet")) as GameObject;
         obj.transform.localPosition = transform.localPosition;
 
         var projectile = obj.GetComponent<AttackProjectile>();
-        projectile.Init(attackable.Group, new Vector2(-3, 0), Damage);
+        projectile.Init(attackable.Group, new Vector2(-3, 0), RangeDamage);
+    }
+
+    private void CloseAttack()
+    {
+        if (CloseDamage == 0) {
+            return;
+        }
+
+        pc.GetComponent<AttackableTarget>().ProcessAttack(CloseDamage);
+    }
+
+    private void KnockBack()
+    {
+        if (GetKnockBacked == false) {
+            return;
+        }
+
+        transform.localPosition += new Vector3(1, 0, 0);
     }
 
     private void ProcessDie()
@@ -54,7 +93,10 @@ class AttackingEnemy : Enemy {
         attackable.ProcessAttack(damage);
 
         if (attackable.IsDead == false) {
-            transform.localPosition += new Vector3(1, 0, 0);
+            KnockBack();
+        }
+        else if (IsWall == true) {
+            pc.Moveable = true;
         }
     }
 
