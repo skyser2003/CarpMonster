@@ -15,6 +15,7 @@ abstract public class Enemy : MonoBehaviour {
     protected void ProcessDie()
     {
         Destroy(gameObject);
+        Map.Instance.RemoveEnemy(this);
     }
 
     public void ProcessAttack(int damage)
