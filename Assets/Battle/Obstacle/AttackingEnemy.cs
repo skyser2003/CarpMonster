@@ -17,7 +17,7 @@ class AttackingEnemy : Enemy {
         attackable.Group = 1;
         pc = GameObject.Find("Carp").GetComponent<PC>();
 
-        attackDelay = AttackSpeed;
+        attackDelay = 0;
     }
 
     private void FixedUpdate()
@@ -60,7 +60,7 @@ class AttackingEnemy : Enemy {
         obj.transform.localPosition = transform.localPosition;
 
         var projectile = obj.GetComponent<AttackProjectile>();
-        projectile.Init(attackable.Group, new Vector2(-3, 0), RangeDamage);
+        projectile.Init(attackable.Group, -5, RangeDamage);
     }
 
     private void CloseAttack()
@@ -83,8 +83,8 @@ class AttackingEnemy : Enemy {
 
     private void ProcessDie()
     {
-        Destroy(gameObject);
         Map.Instance.RemoveEnemy(this);
+        Destroy(gameObject);
     }
 
     public override void ProcessAttack(int damage)

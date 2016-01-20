@@ -13,7 +13,7 @@ public class PC : MonoBehaviour {
         attackable = GetComponent<AttackableTarget>();
         attackable.Group = 0;
 
-        moveSpeed = 1;
+        moveSpeed = 3;
         Moveable = true;
         SetAction(new PCActionJump());
     }
