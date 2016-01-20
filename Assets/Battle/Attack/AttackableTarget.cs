@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 public class AttackableTarget : MonoBehaviour {
-    protected int hp;
+    public int hp;
     
-    public int Group { get; protected set; }
+    public int Group { get; set; }
     public bool IsDead { get; private set; }
 
     private void Start()

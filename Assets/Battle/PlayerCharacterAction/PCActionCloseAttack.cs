@@ -1,8 +1,26 @@
-﻿class PCActionCloseAttack : AbstractPCAction {
+﻿using UnityEngine;
+
+class PCActionCloseAttack : AbstractPCAction {
+    private int damage;
+
+    public PCActionCloseAttack()
+    {
+        this.damage = 10;
+    }
+
+    public PCActionCloseAttack(int damage)
+    {
+        this.damage = damage;
+    }
+
     protected override void ActionInner()
     {
-        var pos = pc.transform.localPosition;
+        var enemy = Map.Instance.FindClosest(pc.transform.localPosition, 1);
+        if (enemy == null) {
+            return;
+        }
 
+        enemy.ProcessAttack(damage);
     }
 
     protected override void UpdateInner(float dt)

@@ -5,19 +5,19 @@ class AttackingEnemy : Enemy {
     private float attackSpeed = 1.0f;
     private float attackDelay = 1.0f;
 
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
 
-        hp = 10;
-        Group = 1;
+        attackable.hp = 10;
+        attackable.Group = 1;
     }
 
     private void FixedUpdate()
     {
         var dt = Time.fixedDeltaTime;
 
-        if (IsDead == true) {
+        if (attackable.IsDead == true) {
             ProcessDie();
         }
 
@@ -34,6 +34,16 @@ class AttackingEnemy : Enemy {
         obj.transform.localPosition = transform.localPosition;
 
         var projectile = obj.GetComponent<AttackProjectile>();
-        projectile.Init(Group, new Vector2(-3, 0), damage);
+        projectile.Init(attackable.Group, new Vector2(-3, 0), damage);
+    }
+
+    public override void SetPCAction(PC pc)
+    {
+        pc.SetAction(new PCActionCloseAttack());
+    }
+
+    public override void UnsetPCAction(PC pc)
+    {
+        pc.SetAction(new PCActionJump());
     }
 }

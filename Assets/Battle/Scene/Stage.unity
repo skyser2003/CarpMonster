@@ -193,6 +193,7 @@ GameObject:
   - 114: {fileID: 919183025}
   - 61: {fileID: 919183030}
   - 50: {fileID: 919183027}
+  - 114: {fileID: 919183031}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -287,6 +288,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &919183031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 919183024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff5880e28561f045b703b80793d471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
 --- !u!1 &1621002997
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +413,7 @@ GameObject:
   - 114: {fileID: 1757430085}
   - 61: {fileID: 1757430088}
   - 50: {fileID: 1757430082}
+  - 114: {fileID: 1757430089}
   m_Layer: 0
   m_Name: Carp
   m_TagString: Untagged
@@ -502,6 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff5880e28561f045b703b80793d471f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
 --- !u!61 &1757430088
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -516,6 +531,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &1757430089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1757430080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff5880e28561f045b703b80793d471f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
 --- !u!1 &2013758994
 GameObject:
   m_ObjectHideFlags: 0
