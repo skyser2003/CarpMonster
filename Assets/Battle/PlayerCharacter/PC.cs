@@ -6,6 +6,8 @@ public class PC : MonoBehaviour {
 
     private float moveSpeed;
 
+    public bool Moveable { get; set; }
+
     virtual protected void Start()
     {
         attackable = GetComponent<AttackableTarget>();
@@ -13,6 +15,7 @@ public class PC : MonoBehaviour {
         attackable.Group = 0;
 
         moveSpeed = 1;
+        Moveable = true;
         SetAction(new PCActionJump());
     }
 
@@ -24,8 +27,10 @@ public class PC : MonoBehaviour {
             ProcessDie();
         }
 
-        var moveDelta = new Vector3(moveSpeed * dt, 0, 0);
-        transform.localPosition += moveDelta;
+        if (Moveable == true) {
+            var moveDelta = new Vector3(moveSpeed * dt, 0, 0);
+            transform.localPosition += moveDelta;
+        }
 
         action.Update(dt);
     }

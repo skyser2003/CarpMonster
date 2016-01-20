@@ -43,6 +43,21 @@ class AttackingEnemy : Enemy {
         projectile.Init(attackable.Group, new Vector2(-3, 0), Damage);
     }
 
+    private void ProcessDie()
+    {
+        Destroy(gameObject);
+        Map.Instance.RemoveEnemy(this);
+    }
+
+    public override void ProcessAttack(int damage)
+    {
+        attackable.ProcessAttack(damage);
+
+        if (attackable.IsDead == false) {
+            transform.localPosition += new Vector3(1, 0, 0);
+        }
+    }
+
     public override void SetPCAction(PC pc)
     {
         pc.SetAction(new PCActionCloseAttack());

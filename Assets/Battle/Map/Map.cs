@@ -39,6 +39,9 @@ class Map : MonoBehaviour {
     public void RemoveEnemy(Enemy enemy)
     {
         enemyList.Remove(enemy);
+        if(enemy == closest) {
+            closest.UnsetPCAction(pc);
+        }
     }
 
     public Enemy FindClosest(Vector3 pos)

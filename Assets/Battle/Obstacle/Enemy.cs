@@ -3,6 +3,7 @@
 abstract public class Enemy : MonoBehaviour {
     abstract public void SetPCAction(PC pc);
     abstract public void UnsetPCAction(PC pc);
+    abstract public void ProcessAttack(int damage);
 
     protected AttackableTarget attackable;
 
@@ -10,20 +11,5 @@ abstract public class Enemy : MonoBehaviour {
     {
         Map.Instance.AddEnemy(this);
         attackable = GetComponent<AttackableTarget>();
-    }
-
-    protected void ProcessDie()
-    {
-        Destroy(gameObject);
-        Map.Instance.RemoveEnemy(this);
-    }
-
-    public void ProcessAttack(int damage)
-    {
-        attackable.ProcessAttack(damage);
-
-        if(attackable.IsDead == false) {
-            transform.localPosition += new Vector3(1, 0, 0);
-        }
     }
 }
