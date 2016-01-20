@@ -30,6 +30,16 @@ public class PC : MonoBehaviour {
         action.Update(dt);
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        var other = collider.gameObject;
+
+        var enemy = other.GetComponent<AttackingEnemy>();
+        if (enemy != null) {
+            attackable.ProcessAttack(enemy.Damage);
+        }
+    }
+
     private void ProcessDie()
     {
         transform.localPosition = new Vector3(-1000, -1000, -1000);

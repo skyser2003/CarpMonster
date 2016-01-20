@@ -21,5 +21,9 @@ abstract public class Enemy : MonoBehaviour {
     public void ProcessAttack(int damage)
     {
         attackable.ProcessAttack(damage);
+
+        if(attackable.IsDead == false) {
+            transform.localPosition += new Vector3(1, 0, 0);
+        }
     }
 }
