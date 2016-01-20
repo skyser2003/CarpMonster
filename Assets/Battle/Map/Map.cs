@@ -8,6 +8,7 @@ class Map : MonoBehaviour {
     private List<Enemy> enemyList = new List<Enemy>();
     private PC pc;
     private Enemy target;
+    private int pcIndex = 0;
 
     private Map()
     {
@@ -24,6 +25,7 @@ class Map : MonoBehaviour {
     {
         var dt = Time.fixedDeltaTime;
 
+        // Change pc action to closest monster's setting
         var closest = FindClosest(pc.transform.localPosition, 2);
         if (closest != null) {
             if (target != closest) {
@@ -42,6 +44,26 @@ class Map : MonoBehaviour {
         }
 
         target = closest;
+
+        // Generate new monster
+        var newPcIndex = (int)(pc.transform.localPosition.x / 5.0f);
+        if (newPcIndex != pcIndex) {
+            pcIndex = newPcIndex;
+
+            GenerateNewMonster((pcIndex + 1) * 5);
+        }
+    }
+
+    public void GenerateNewMonster(int xPos)
+    {
+        var monsterList = new string[] { "AttackingEnemy", "HurdleEnemy", "WallEnemy" };
+        var index = Random.Range(0, monsterList.Length);
+
+        var monsterName = monsterList[index];
+        var newMonster = Instantiate(Resources.Load(monsterName)) as GameObject;
+        newMonster.transform.localPosition = new Vector3(xPos, 0, 0);
+
+        AddEnemy(newMonster.GetComponent<Enemy>());
     }
 
     public void AddEnemy(Enemy enemy)
