@@ -25,7 +25,6 @@ class PCActionJump : AbstractPCAction {
     override protected void UpdateInner(float dt)
     {
         speed -= gravity * dt;
-        Debug.Log(speed);
 
         var delta = new Vector3(0, speed * dt, 0);
         var newPos = pc.transform.localPosition + delta;
