@@ -13,7 +13,7 @@ class PCActionJump : AbstractPCAction {
     {
         var pc = GameObject.Find("Carp");
 
-        if (pc.transform.localPosition.y <= 0) {
+        if (pc.transform.localPosition.y <= 0 && currentJumpCount != possibleJumpCount) {
             currentJumpCount = possibleJumpCount;
             pc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Carp/Carp_stand");
         }

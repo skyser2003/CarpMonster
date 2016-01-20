@@ -2,6 +2,7 @@
     abstract protected void ActionInner();
     abstract protected void UpdateInner(float dt);
 
+    private bool doUpdate = false;
     protected PC pc;
 
     public void SetPC(PC pc)
@@ -12,10 +13,13 @@
     public void Action()
     {
         ActionInner();
+        doUpdate = true;
     }
 
     public void Update(float dt)
     {
-        UpdateInner(dt);
+        if (doUpdate == true) {
+            UpdateInner(dt);
+        }
     }
 }
