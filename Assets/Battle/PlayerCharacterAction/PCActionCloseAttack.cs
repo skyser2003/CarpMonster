@@ -20,7 +20,7 @@ class PCActionCloseAttack : AbstractPCAction {
             return;
         }
 
-        enemy.ProcessAttack(damage);
+        enemy.GetComponent<AttackableTarget>().ProcessAttack(damage);
     }
 
     protected override void UpdateInner(float dt)

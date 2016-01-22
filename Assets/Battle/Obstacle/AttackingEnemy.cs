@@ -87,7 +87,7 @@ class AttackingEnemy : Enemy {
         Destroy(gameObject);
     }
 
-    public override void ProcessAttack(int damage)
+    public void ProcessAttack(int damage)
     {
         attackable.ProcessAttack(damage);
 

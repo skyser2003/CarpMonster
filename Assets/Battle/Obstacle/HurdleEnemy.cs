@@ -13,10 +13,6 @@ class HurdleEnemy : Enemy {
         pc.GetComponent<AttackableTarget>().ProcessAttack(Damage);
     }
 
-    public override void ProcessAttack(int damage)
-    {
-    }
-
     public override void SetPCAction(PC pc)
     {
         pc.SetAction(new PCActionJump());
