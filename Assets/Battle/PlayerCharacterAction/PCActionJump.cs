@@ -13,7 +13,7 @@ class PCActionJump : AbstractPCAction {
     {
         var pc = GameObject.Find("Carp");
 
-        if (pc.transform.localPosition.y <= 0 && currentJumpCount != possibleJumpCount) {
+        if (pc.GetComponent<GravityObject>().Speed <= 0 && pc.transform.localPosition.y <= 0 && currentJumpCount != possibleJumpCount) {
             currentJumpCount = possibleJumpCount;
         }
     }
