@@ -15,7 +15,6 @@ class PCActionJump : AbstractPCAction {
 
         if (pc.transform.localPosition.y <= 0 && currentJumpCount != possibleJumpCount) {
             currentJumpCount = possibleJumpCount;
-            pc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Carp/Carp_stand");
         }
     }
 
@@ -27,7 +26,6 @@ class PCActionJump : AbstractPCAction {
 
         --currentJumpCount;
         pc.GetComponent<GravityObject>().Speed = 10;
-        pc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Carp/Carp_jump");
     }
 
     override protected void UpdateInner(float dt)

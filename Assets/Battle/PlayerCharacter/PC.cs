@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PC : MonoBehaviour {
     private AbstractPCAction action;
@@ -44,6 +45,11 @@ public class PC : MonoBehaviour {
     {
         this.action = action;
         action.SetPC(this);
+    }
+
+    public Type GetActionType()
+    {
+        return action.GetType();
     }
 
     public void Action()
