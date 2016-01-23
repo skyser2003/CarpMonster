@@ -18,7 +18,7 @@
 
     public void Update(float dt)
     {
-        if(doUpdate == true) {
+        if (doUpdate == true) {
             UpdateInner(dt);
         }
     }

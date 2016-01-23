@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 public class AttackableTarget : MonoBehaviour {
-    protected int hp;
-    
-    public int Group { get; protected set; }
+    public int Hp;
+
+    public int Group { get; set; }
     public bool IsDead { get; private set; }
 
     private void Start()
@@ -13,8 +13,8 @@ public class AttackableTarget : MonoBehaviour {
 
     public void ProcessAttack(int damage)
     {
-        hp -= damage;
-        if(hp <= 0) {
+        Hp -= damage;
+        if (Hp <= 0) {
             Die();
         }
     }

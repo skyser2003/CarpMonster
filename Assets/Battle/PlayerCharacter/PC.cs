@@ -1,18 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class PC : AttackableTarget {
+public class PC : MonoBehaviour {
     private AbstractPCAction action;
+    private AttackableTarget attackable;
 
     private float moveSpeed;
-    private int damage;
 
-    private void Start()
+    public bool Moveable { get; set; }
+
+    virtual protected void Start()
     {
-        hp = 20;
-        Group = 0;
+        attackable = GetComponent<AttackableTarget>();
+        attackable.Group = 0;
 
-        moveSpeed = 1;
-        damage = 10;
+        moveSpeed = 3;
+        Moveable = true;
         SetAction(new PCActionJump());
     }
 
@@ -20,25 +23,37 @@ public class PC : AttackableTarget {
     {
         var dt = Time.fixedDeltaTime;
 
-        if (IsDead == true) {
+        if (attackable.IsDead == true) {
             ProcessDie();
         }
 
-        var moveDelta = new Vector3(moveSpeed * dt, 0, 0);
-        transform.localPosition += moveDelta;
+        if (Moveable == true) {
+            var moveDelta = new Vector3(moveSpeed * dt, 0, 0);
+            transform.localPosition += moveDelta;
+        }
 
         action.Update(dt);
     }
 
     private void ProcessDie()
     {
-        Destroy(gameObject);
+        transform.localPosition = new Vector3(-1000, -1000, -1000);
+        gameObject.SetActive(false);
     }
 
     public void SetAction(AbstractPCAction action)
     {
+        if (this.action.GetType() == action.GetType()) {
+            return;
+        }
+
         this.action = action;
         action.SetPC(this);
+    }
+
+    public Type GetActionType()
+    {
+        return action.GetType();
     }
 
     public void Action()

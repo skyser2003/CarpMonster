@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-abstract public class Enemy : AttackableTarget {
-    abstract public void UpdatePCAction(PC pc);
+abstract public class Enemy : MonoBehaviour {
+    abstract public void SetPCAction(PC pc);
+    abstract public void UnsetPCAction(PC pc);
 
-    virtual protected void Start()
+    protected AttackableTarget attackable;
+
+    public int ID { get; set; }
+
+    protected virtual void Start()
     {
-
-    }
-
-    protected void ProcessDie()
-    {
-        Destroy(gameObject);
+        attackable = GetComponent<AttackableTarget>();
     }
 }

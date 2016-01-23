@@ -10,11 +10,8 @@ class PCControl : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Z) || (Input.touchSupported && Input.GetTouch(0).phase == TouchPhase.Began)) {
             pc.Action();
-        }
-        if(Input.GetKeyDown(KeyCode.Z)) {
-            pc.Attack();
         }
     }
 }

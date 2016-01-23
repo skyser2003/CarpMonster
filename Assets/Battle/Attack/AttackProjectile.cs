@@ -3,13 +3,13 @@
 class AttackProjectile : MonoBehaviour {
     private int group;
 
-    private Vector2 velocity;
+    private float speed;
     private int damage;
 
     private void FixedUpdate()
     {
         var dt = Time.fixedDeltaTime;
-        Vector3 delta = dt * velocity;
+        var delta = new Vector3(dt * speed, 0, 0);
         transform.localPosition += delta;
     }
 
@@ -28,10 +28,10 @@ class AttackProjectile : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public void Init(int group, Vector2 velocity, int damage)
+    public void Init(int group, float speed, int damage)
     {
         this.group = group;
-        this.velocity = velocity;
+        this.speed = speed;
         this.damage = damage;
     }
 }
