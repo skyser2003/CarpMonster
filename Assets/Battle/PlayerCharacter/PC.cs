@@ -43,7 +43,7 @@ public class PC : MonoBehaviour {
 
     public void SetAction(AbstractPCAction action)
     {
-        if (this.action.GetType() == action.GetType()) {
+        if (this.action != null && action != null && this.action.GetType() == action.GetType()) {
             return;
         }
 

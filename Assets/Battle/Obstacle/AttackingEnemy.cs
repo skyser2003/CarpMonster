@@ -43,7 +43,7 @@ class AttackingEnemy : Enemy {
         var other = collider.gameObject;
         if (other.GetComponent<PC>() != null) {
             if (IsWall == true) {
-                pc.Moveable = false;
+                other.GetComponent<PC>().Moveable = false;
             }
 
             CloseAttack();
